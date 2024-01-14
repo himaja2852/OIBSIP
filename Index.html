@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="x-icon" href="https://www.shutterstock.com/shutterstock/photos/1116733565/display_1500/stock-vector-thermometer-vector-icon-with-temperature-half-scale-for-weather-or-medicine-1116733565.jpg">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://t4.ftcdn.net/jpg/04/89/68/23/360_F_489682374_ckc0OVyT6Av0NGcuYbwBSCxy62blF4CQ.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+            margin: 0;
+            padding: 50px; 
+            color: #fff; 
+            height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        input, select, button {
+            margin: 10px;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 200px;
+            text-align: center;
+        }
+
+        select {
+            width: 150px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Add transition for a smooth effect */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+       
+        .highlight {
+            color: #f00; 
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="color: rgb(161, 197, 173);">Temperature Converter</h2>
+
+<label for="temperature">Enter Temperature:</label>
+<input type="text" id="temperature" placeholder="Enter temperature" oninput="validateInput()">
+
+<label for="unit">Select Unit:</label>
+<select id="unit">
+    <option value="celsius">Celsius</option>
+    <option value="fahrenheit">Fahrenheit</option>
+    <option value="kelvin">Kelvin</option>
+</select>
+
+<button onclick="convertTemperature()" style="background-color: #3498db; color: white;">Convert</button>
+
+<p id="result"></p>
+
+<script>
+    function validateInput() {
+        const temperatureInput = document.getElementById('temperature');
+        temperatureInput.value = temperatureInput.value.replace(/[^0-9.-]/g, '');
+    }
+
+    function convertTemperature() {
+        const temperatureInput = document.getElementById('temperature').value;
+        const unit = document.getElementById('unit').value;
+        let convertedTemperature;
+
+        if (unit === 'celsius') {
+            convertedTemperature = (parseFloat(temperatureInput) * 9/5) + 32;
+        } else if (unit === 'fahrenheit') {
+            convertedTemperature = (parseFloat(temperatureInput) - 32) * 5/9;
+        } else if (unit === 'kelvin') {
+            convertedTemperature = parseFloat(temperatureInput) + 273.15;
+        }
+
+        const resultElement = document.getElementById('result');
+       
+        resultElement.innerHTML = `Converted Temperature: <span class="highlight">${convertedTemperature.toFixed(2)}</span> ${unit.toUpperCase()}`;
+    }
+</script>
+
+</body>
+</html>
